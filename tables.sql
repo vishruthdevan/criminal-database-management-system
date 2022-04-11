@@ -76,3 +76,39 @@ create table victim(
   phone int,
   aadhar int
 );
+create table victim_fir(
+  victim_id int,
+  crime_id int,
+  foreign key (victim_id) references victim(victim_id),
+  foreign key (crime_id) references crime_register(crime_id)
+);
+create table act_section(
+  section_id int,
+  crime_id int,
+  foreign key (section_id) references section(section_id),
+  foreign key (crime_id) references crime_register(crime_id)
+);
+create table accused_fir(
+  accused_id int,
+  crime_id int,
+  foreign key (accused_id) references accused(accused_id),
+  foreign key (crime_id) references crime_register(crime_id)
+);
+create table witness_fir(
+  witness_id int,
+  crime_id int,
+  foreign key (witness_id) references witness(witness_id),
+  foreign key (crime_id) references crime_register(crime_id)
+);
+desc crime_register;
+desc police_station;
+desc officer_record;
+desc complainer;
+desc witness;
+desc victim;
+desc section;
+desc accused;
+desc vitcim_fir;
+desc act_section;
+desc accused_fir;
+desc witness_fir;
