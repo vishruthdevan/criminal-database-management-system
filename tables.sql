@@ -17,7 +17,8 @@ create table police_station(
   ps_name varchar(40),
   address varchar(100),
   phone int,
-  officer_id int
+  officer_id int,
+  foreign key (officer_id) references officer_record(officer_id)
 );
 create table complainer(
   complainer_id int primary key,
@@ -40,7 +41,9 @@ create table crime_register(
   officer_id varchar(15),
   case_description varchar(50),
   accused_id int,
-  complainer_id int
+  complainer_id int,
+  foreign key (ps_id) references police_station(ps_id),
+  foreign key (complainer_id) references complainer(complainer_id)
 );
 create table witness(
   witness_id int primary key,
