@@ -1,26 +1,10 @@
 from flask import Flask, render_template, url_for, redirect, flash
-from forms import RegistrationForm, LoginForm
-from flask_sqlalchemy import SQLAlchemy
+from frontend import app, connection, db
+from frontend.forms import RegistrationForm, LoginForm
 from sqlalchemy.sql import text
-import pymysql
-
-app = Flask(__name__)
-
-app.config['SECRET_KEY'] = 'secret123'
-app.config['SQLALCHEMY_DATABASE_URI'] = 'mysql://root:password@localhost/project'
-db = SQLAlchemy(app)
-
-connection = db.engine.connect()
-
-
-class Admin(db.Model):
-    id = db.Column(db.Integer, primary_key=True)
-    username = db.Column(db.String(20), unique=True, nullable=False)
-    password = db.Column(db.String(60), nullable=False)
-
-    def __repr__(self):
-        return f"Admin('{self.username}', '{self.email}', '{self.image_file}')"
-
+from flask import request
+from frontend.models import Admin
+from flask_login import login_user, current_user, logout_user, login_required
 
 @app.route('/')
 def home():
@@ -31,15 +15,30 @@ def home():
     return render_template('index.html')
 
 
-@app.route('/db')
-def db():
-    result = connection.execute(text("SELECT * FROM victim"))
-    result = result.mappings().all()
-    return render_template('db.html', result=result)
+@app.route('/view')
+def view():
+    message = ""
+    results = []
+    if(category := request.values.get('search')):
+        try:
+            temp = connection.execute(text(f"SELECT * FROM {category}"))
+            message = "Table values: "
+            results.append(temp.mappings().all())
+        except Exception:
+            message = "Table does not exist!"
+    else:
+        for i in ['crime_register', 'victim']:
+            temp = connection.execute(text(f"SELECT * FROM {i}"))
+            results.append(temp.mappings().all())
+            message = "Table values: "
+    return render_template('db.html', results=results, message=message)
+
 
 
 @app.route("/register", methods=['GET', 'POST'])
 def register():
+    if current_user.is_authenticated:
+        return redirect(url_for('home'))
     form = RegistrationForm()
     if form.validate_on_submit():
         flash(f'Account created for {form.username.data}!', 'success')
@@ -57,7 +56,3 @@ def login():
         else:
             flash('Login Unsuccessful. Please check username and password', 'danger')
     return render_template('login.html', title='Login', form=form)
-
-
-if __name__ == '__main__':
-    app.run(debug=True)
