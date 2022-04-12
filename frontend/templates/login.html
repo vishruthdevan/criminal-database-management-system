@@ -1,0 +1,16 @@
+{% extends "layout.html" %}
+{% block content %}
+<form action="" method="post">
+    {{ form.hidden_tag() }}
+
+    {{ form.username.label() }}
+    {{ form.username() }}
+
+    {{ form.password.label() }}
+    {{ form.password() }}
+
+    {{ form.submit() }}
+
+</form>
+<a href="{{ url_for('register') }}">Create Account</a>
+{% endblock content %}
