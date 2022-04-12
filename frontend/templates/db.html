@@ -1,0 +1,14 @@
+{% extends 'layout.html' %}
+
+{% block content %}
+<ul>
+    {% for i in result %}
+    <li>
+        {% for j in i %}
+        {{ j }} : {{ i[j] }}
+        {% endfor %}
+    </li>
+    {% endfor %}
+</ul>
+
+{% endblock content %}
