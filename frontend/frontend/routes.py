@@ -16,6 +16,7 @@ def home():
 
 
 @app.route('/view')
+@login_required
 def view():
     message = ""
     results = []
@@ -41,18 +42,40 @@ def register():
         return redirect(url_for('home'))
     form = RegistrationForm()
     if form.validate_on_submit():
+        admin = Admin(username=form.username.data, password=form.password.data)
+        db.session.add(admin)
+        db.session.commit()
         flash(f'Account created for {form.username.data}!', 'success')
-        return redirect(url_for('home'))
+        # connection.execute(text("INSERT INTO admin (username, password) VALUES (:username, :password)"),
+        #                         {"username": form.username.data, "password": form.password.data})
+        return redirect(url_for('login'))
     return render_template('register.html', title='Register', form=form)
 
 
 @app.route("/login", methods=['GET', 'POST'])
 def login():
+    if current_user.is_authenticated:
+        return redirect(url_for('home'))
     form = LoginForm()
     if form.validate_on_submit():
-        if form.email.data == 'admin@blog.com' and form.password.data == 'password':
+        admin = Admin.query.filter_by(username=form.username.data).first()
+        # print(user)
+        if admin and form.password.data == admin.password:
+            login_user(admin)
             flash('You have been logged in!', 'success')
             return redirect(url_for('home'))
         else:
             flash('Login Unsuccessful. Please check username and password', 'danger')
     return render_template('login.html', title='Login', form=form)
+
+
+@app.route("/logout")
+def logout():
+    logout_user()
+    return redirect(url_for('home'))
+
+
+@app.route("/account")
+@login_required
+def account():
+    return render_template('account.html', title='Account')
