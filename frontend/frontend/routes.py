@@ -1,6 +1,6 @@
 from flask import Flask, render_template, url_for, redirect, flash
 from frontend import app, connection, db
-from frontend.forms import RegistrationForm, LoginForm
+from frontend.forms import CrimeForm, RegistrationForm, LoginForm
 from sqlalchemy.sql import text
 from flask import request
 from frontend.models import Admin
@@ -59,7 +59,6 @@ def login():
     form = LoginForm()
     if form.validate_on_submit():
         admin = Admin.query.filter_by(username=form.username.data).first()
-        # print(user)
         if admin and form.password.data == admin.password:
             login_user(admin)
             flash('You have been logged in!', 'success')
@@ -79,3 +78,18 @@ def logout():
 @login_required
 def account():
     return render_template('account.html', title='Account')
+
+
+
+@app.route("/add", methods=['GET', 'POST'])
+@login_required
+def add():
+    form = CrimeForm()
+    if request.method == "POST":
+        if form.validate_on_submit():
+            
+            connection.execute(text(f"INSERT INTO crime_register (crime_type, crime_date, crime_time, crime_location, crime_description, crime_status) VALUES (:crime_type, :crime_date, :crime_time, :crime_location, :crime_description, :crime_status)"),
+                                {"crime_type": form.crime_type.data, "crime_date": form.crime_date.data, "crime_time": form.crime_time.data, "crime_location": form.crime_location.data, "crime_description": form.crime_description.data, "crime_status": form.crime_status.data})
+            return redirect(url_for('home'))
+    return render_template('add.html', title='Add', form=form)
+
