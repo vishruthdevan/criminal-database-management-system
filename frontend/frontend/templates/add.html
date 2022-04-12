@@ -1,0 +1,114 @@
+{% extends 'layout.html' %}
+
+{% block content %}
+<form action="" method="post">
+    {{ form.hidden_tag() }}
+    <p>
+        {{ form.date_of_offence.label }}<br>
+        {{ form.date_of_offence }}<br>
+        {{ form.fir_no.label }}<br>
+        {{ form.fir_no }}<br>
+        {{ form.date_of_report.label }}<br>
+        {{ form.date_of_report }}<br>
+        {{ form.case_status.label }}<br>
+        {{ form.case_status }}<br>
+        {{ form.arrested.label }}<br>
+        {{ form.arrested }}<br>
+        {{ form.challan_id.label }}<br>
+        {{ form.challan_id }}<br>
+        {{ form.case_description.label }}<br>
+        {{ form.case_description }}<br>
+    </p>
+    <p>
+        {{ form.ps_name.label }}<br>
+        {{ form.ps_name }}<br>
+        {{ form.address.label }}<br>
+        {{ form.address }}<br>
+        {{ form.phone.label }}<br>
+        {{ form.phone }}<br>
+    </p>
+    <p>
+        {{ form.o_name.label }}<br>
+        {{ form.o_name }}<br>
+        {{ form.o_address.label }}<br>
+        {{ form.o_address }}<br>
+        {{ form.o_age.label }}<br>
+        {{ form.o_age }}<br>
+        {{ form.o_aadhar.label }}<br>
+        {{ form.o_aadhar }}<br>
+        {{ form.o_gender.label }}<br>
+        {{ form.o_gender }}<br>
+        {{ form.o_phone.label }}<br>
+        {{ form.o_phone }}<br>
+        {{ form.o_email_id.label }}<br>
+        {{ form.o_email_id }}<br>
+        {{ form.o_qualification.label }}<br>
+        {{ form.o_qualification }}<br>
+    </p>
+    <p>
+        {{ form.c_name.label }}<br>
+        {{ form.c_name }}<br>
+        {{ form.c_address.label }}<br>
+        {{ form.c_address }}<br>
+        {{ form.c_age.label }}<br>
+        {{ form.c_age }}<br>
+        {{ form.c_aadhar.label }}<br>
+        {{ form.c_aadhar }}<br>
+        {{ form.c_gender.label }}<br>
+        {{ form.c_gender }}<br>
+        {{ form.c_phone.label }}<br>
+        {{ form.c_phone }}<br>
+    </p>
+    <p>
+        {{ form.w_name.label }}<br>
+        {{ form.w_name }}<br>
+        {{ form.w_address.label }}<br>
+        {{ form.w_address }}<br>
+        {{ form.w_age.label }}<br>
+        {{ form.w_age }}<br>
+        {{ form.w_aadhar.label }}<br>
+        {{ form.w_aadhar }}<br>
+        {{ form.w_gender.label }}<br>
+        {{ form.w_gender }}<br>
+        {{ form.w_phone.label }}<br>
+        {{ form.w_phone }}<br>
+    </p>
+    <p>
+        {{ form.a_name.label }}<br>
+        {{ form.a_name }}<br>
+        {{ form.a_address.label }}<br>
+        {{ form.a_address }}<br>
+        {{ form.a_age.label }}<br>
+        {{ form.a_age }}<br>
+        {{ form.a_aadhar.label }}<br>
+        {{ form.a_aadhar }}<br>
+        {{ form.a_gender.label }}<br>
+        {{ form.a_gender }}<br>
+        {{ form.a_phone.label }}<br>
+        {{ form.a_phone }}<br>
+    </p>
+    <p>
+        {{ form.v_name.label }}<br>
+        {{ form.v_name }}<br>
+        {{ form.v_address.label }}<br>
+        {{ form.v_address }}<br>
+        {{ form.v_age.label }}<br>
+        {{ form.v_age }}<br>
+        {{ form.v_aadhar.label }}<br>
+        {{ form.v_aadhar }}<br>
+        {{ form.v_gender.label }}<br>
+        {{ form.v_gender }}<br>
+        {{ form.v_phone.label }}<br>
+        {{ form.v_phone }}<br>
+    </p>
+    <p>
+        {{ form.s_id.label }}<br>
+        {{ form.s_id }}<br>
+        {{ form.s_desc.label }}<br>
+        {{ form.s_desc }}<br>
+    </p>
+    <p>
+        {{ form.submit }}
+        
+</form>
+{% endblock content %}
