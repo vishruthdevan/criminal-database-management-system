@@ -1,7 +1,7 @@
 from flask_wtf import FlaskForm
 from sqlalchemy import Integer
-from wtforms import StringField, PasswordField, SubmitField, IntegerField, DateField
-from wtforms.validators import DataRequired, Length, EqualTo, ValidationError
+from wtforms import StringField, PasswordField, SubmitField, IntegerField, DateField, TextAreaField
+from wtforms.validators import DataRequired, Length, EqualTo, ValidationError, Optional
 from frontend.models import Admin
 
 class RegistrationForm(FlaskForm):
@@ -26,56 +26,56 @@ class LoginForm(FlaskForm):
 
 
 class CrimeForm(FlaskForm):
-    date_of_offence = DateField('Date of Offence', format="%Y-%m-%d")
-    fir_no = IntegerField('FIR No.')
-    date_of_report = DateField('Date of Report', format="%Y-%m-%d")
-    case_status = StringField('Case Status')
-    arrested = StringField('Arrested')
-    challan_id = IntegerField('Challan ID')
-    case_description = StringField('Case Description')
+    date_of_offence = DateField('Date of Offence', format="%Y-%m-%d", validators =[Optional()])
+    fir_no = IntegerField('FIR No.', validators =[Optional()])
+    date_of_report = DateField('Date of Report', format="%Y-%m-%d", validators = [Optional()])
+    case_status = StringField('Case Status', validators =[Optional()])
+    arrested = StringField('Arrested', validators =[Optional()])
+    challan_id = IntegerField('Challan ID', validators =[Optional()])
+    case_description = StringField('Case Description', validators =[Optional()])
 
-    ps_name = StringField('Police Station Name')
-    address = StringField('Address')
-    phone = IntegerField('Phone')
+    ps_name = StringField('Police Station Name', validators =[Optional()])
+    ps_address = StringField('Address', validators =[Optional()])
+    ps_phone = IntegerField('Phone', validators =[Optional()])
 
-    o_name  = StringField('Officer Name')
-    o_address = StringField('Officer Address')
-    o_age = IntegerField('Officer Age') 
-    o_aadhar = IntegerField('Officer Aadhar')
-    o_gender = StringField('Officer Gender')
-    o_phone = IntegerField('Officer Phone')
-    o_email_id = StringField('Officer email')
-    o_qualification = StringField('Qualification')
+    o_name  = StringField('Officer Name', validators =[Optional()])
+    o_address = StringField('Officer Address', validators =[Optional()])
+    o_age = IntegerField('Officer Age', validators =[Optional()]) 
+    o_aadhar = IntegerField('Officer Aadhar', validators =[Optional()])
+    o_gender = StringField('Officer Gender', validators =[Optional()])
+    o_phone = IntegerField('Officer Phone', validators =[Optional()])
+    o_email_id = StringField('Officer email', validators =[Optional()])
+    o_qualification = StringField('Qualification', validators =[Optional()])
     
-    c_name  = StringField('Complainer Name')
-    c_address = StringField('Complainer Address')
-    c_age = IntegerField('Complainer Age') 
-    c_aadhar = IntegerField('Complainer Aadhar')
-    c_gender = StringField('Complainer Gender')
-    c_phone = IntegerField('Complainer Phone')
+    c_name  = StringField('Complainer Name', validators =[Optional()])
+    c_address = StringField('Complainer Address', validators =[Optional()])
+    c_age = IntegerField('Complainer Age', validators =[Optional()]) 
+    c_aadhar = IntegerField('Complainer Aadhar', validators =[Optional()])
+    c_gender = StringField('Complainer Gender', validators =[Optional()])
+    c_phone = IntegerField('Complainer Phone', validators =[Optional()])
 
-    w_name  = StringField('Witness Name')
-    w_address = StringField('Witness Address')
-    w_age = IntegerField('Witness Age') 
-    w_aadhar = IntegerField('Witness Aadhar')
-    w_gender = StringField('Witness Gender')
-    w_phone = IntegerField('Witness Phone')
+    w_name  = TextAreaField('Witness Name', validators =[Optional()])
+    w_address = TextAreaField('Witness Address', validators =[Optional()])
+    w_age = TextAreaField('Witness Age', validators =[Optional()]) 
+    w_aadhar = TextAreaField('Witness Aadhar', validators =[Optional()])
+    w_gender = TextAreaField('Witness Gender', validators =[Optional()])
+    w_phone = TextAreaField('Witness Phone', validators =[Optional()])
 
-    a_name  = StringField('Accused Name')
-    a_address = StringField('Accused Address')
-    a_age = IntegerField('Accused Age') 
-    a_aadhar = IntegerField('Accused Aadhar')
-    a_gender = StringField('Accused Gender')
-    a_phone = IntegerField('Accused Phone')
+    a_name  = TextAreaField('Accused Name', validators =[Optional()])
+    a_address = TextAreaField('Accused Address', validators =[Optional()])
+    a_age = TextAreaField('Accused Age', validators =[Optional()]) 
+    a_aadhar = TextAreaField('Accused Aadhar', validators =[Optional()])
+    a_gender = TextAreaField('Accused Gender', validators =[Optional()])
+    a_phone = TextAreaField('Accused Phone', validators =[Optional()])
 
-    v_name  = StringField('Victim Name')
-    v_address = StringField('Victim Address')
-    v_age = IntegerField('Victim Age') 
-    v_aadhar = IntegerField('Victim Aadhar')
-    v_gender = StringField('Victim Gender')
-    v_phone = IntegerField('Victim Phone')
+    v_name  = TextAreaField('Victim Name', validators=[Optional()])
+    v_address = TextAreaField('Victim Address', validators=[Optional()])
+    v_age = TextAreaField('Victim Age', validators=[Optional()]) 
+    v_aadhar = TextAreaField('Victim Aadhar', validators=[Optional()])
+    v_gender = TextAreaField('Victim Gender', validators=[Optional()])
+    v_phone = TextAreaField('Victim Phone', validators=[Optional()])
 
-    s_id = StringField('Section id')
-    s_desc = StringField('Section Description')
+    s_id = StringField('Section id', validators =[Optional()])
+    s_desc = StringField('Section Description', validators =[Optional()])
 
     submit = SubmitField('Submit')
