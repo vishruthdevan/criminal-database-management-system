@@ -1,8 +1,13 @@
-drop database project;
 create database project;
 use project;
+
+create table admin(
+	admin_id int primary key auto_increment,
+    username varchar(50),
+    password varchar(50)
+);
 create table officer_record(
-  officer_id int primary key,
+  officer_id int primary key auto_increment,
   name varchar(40),
   address varchar(100),
   age int,
@@ -13,15 +18,15 @@ create table officer_record(
   aadhar int
 );
 create table police_station(
-  ps_id int primary key,
-  ps_name varchar(40),
+  ps_id int primary key auto_increment,
+  name varchar(40),
   address varchar(100),
   phone int,
   officer_id int,
   foreign key (officer_id) references officer_record(officer_id)
 );
 create table complainer(
-  complainer_id int primary key,
+  complainer_id int primary key auto_increment,
   name varchar(40),
   address varchar(100),
   age int,
@@ -29,24 +34,8 @@ create table complainer(
   phone int,
   aadhar int
 );
-create table crime_register(
-  crime_id int primary key,
-  date_of_offence date,
-  fir_no int,
-  ps_id int,
-  date_of_report date,
-  case_status varchar(20),
-  arrested varchar(15),
-  challan_id int,
-  officer_id varchar(15),
-  case_description varchar(50),
-  accused_id int,
-  complainer_id int,
-  foreign key (ps_id) references police_station(ps_id),
-  foreign key (complainer_id) references complainer(complainer_id)
-);
 create table witness(
-  witness_id int primary key,
+  witness_id int primary key auto_increment,
   name varchar(40),
   address varchar(100),
   age int,
@@ -55,7 +44,7 @@ create table witness(
   aadhar int
 );
 create table accused(
-  accused_id int primary key,
+  accused_id int primary key auto_increment,
   name varchar(40),
   address varchar(100),
   age int,
@@ -68,13 +57,28 @@ create table section(
   section_description varchar(50)
 );
 create table victim(
-  victim_id int primary key,
+  victim_id int primary key auto_increment,
   name varchar(40),
   address varchar(100),
   age int,
   gender varchar(15),
   phone int,
   aadhar int
+);
+create table crime_register(
+  crime_id int primary key auto_increment,
+  date_of_offence date,
+  fir_no int,
+  ps_id int,
+  date_of_report date,
+  case_status varchar(20),
+  arrested varchar(15),
+  challan_id int,
+  officer_id varchar(15),
+  case_description varchar(50),
+  complainer_id int,
+  foreign key (ps_id) references police_station(ps_id),
+  foreign key (complainer_id) references complainer(complainer_id)
 );
 create table victim_fir(
   victim_id int,
@@ -100,6 +104,12 @@ create table witness_fir(
   foreign key (witness_id) references witness(witness_id),
   foreign key (crime_id) references crime_register(crime_id)
 );
+
+
+
+
+
+
 desc crime_register;
 desc police_station;
 desc officer_record;
@@ -112,3 +122,5 @@ desc vitcim_fir;
 desc act_section;
 desc accused_fir;
 desc witness_fir;
+
+SET GLOBAL sql_mode = '';
