@@ -1,5 +1,22 @@
 {% extends 'layout.html' %}
 
 {% block content %}
-init
+
+<h1>Criminal Database Management System</h1>
+
+<br>
+
+<a href="{{ url_for('view') }}">View database</a>
+<br>
+<a href="{{ url_for('add') }}">Add entries</a>
+
+
+<h5>Submitted by:</h5>
+<ul>
+<li>VISHRUTH DEVAN 20BCE2953</li>
+<li>ADVAITH NAIR 20BCE2429</li>
+<li>AKHIL RAVINDRAN 20BCE2442</li>
+<li>SARTHAK KHANDELWAL 20BCE2443</li>
+<li>SISIRA REDDY Y 20BCE2448</li>
+</ul>
 {% endblock content %}
