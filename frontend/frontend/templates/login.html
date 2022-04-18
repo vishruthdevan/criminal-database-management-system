@@ -5,12 +5,11 @@
 
     {{ form.username.label() }}
     {{ form.username() }}
-
+    <br><br>
     {{ form.password.label() }}
     {{ form.password() }}
-
+    <br><br>
     {{ form.submit() }}
-
 </form>
-<a href="{{ url_for('register') }}">Create Account</a>
+<a href="{{ url_for('register') }}">Don't have an account? Create one.</a>
 {% endblock content %}
