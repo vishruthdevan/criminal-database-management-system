@@ -5,6 +5,7 @@ from flask_login import LoginManager
 app = Flask(__name__)
 app.config['SECRET_KEY'] = 'secret123'
 app.config['SQLALCHEMY_DATABASE_URI'] = 'mysql://root:password@localhost/project'
+app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 db = SQLAlchemy(app)
 connection = db.engine.connect()
 login_manager = LoginManager(app)
